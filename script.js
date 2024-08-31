@@ -10,7 +10,7 @@ function createSVGElement(type, attributes) {
 
 // Create face outline
 const face = createSVGElement('path', {
-    d: 'M120,140 Q150,80 200,140 Q240,200 200,260 Q150,300 100,260 Q80,200 120,140',
+    d: 'M100,120 Q150,60 200,120 Q240,180 200,240 Q150,280 100,240 Q60,180 100,120',
     fill: 'none',
     stroke: '#8A2BE2',
     'stroke-width': '2'
@@ -19,11 +19,11 @@ svg.appendChild(face);
 
 // Create eyes
 const leftEye = createSVGElement('ellipse', {
-    cx: '140', cy: '170', rx: '20', ry: '15',
+    cx: '130', cy: '150', rx: '20', ry: '15',
     fill: 'white', stroke: '#8A2BE2', 'stroke-width': '2'
 });
 const rightEye = createSVGElement('ellipse', {
-    cx: '180', cy: '170', rx: '20', ry: '15',
+    cx: '170', cy: '150', rx: '20', ry: '15',
     fill: 'white', stroke: '#8A2BE2', 'stroke-width': '2'
 });
 svg.appendChild(leftEye);
@@ -31,27 +31,17 @@ svg.appendChild(rightEye);
 
 // Create pupils (for eye movement)
 const leftPupil = createSVGElement('circle', {
-    cx: '140', cy: '170', r: '5', fill: '#8A2BE2'
+    cx: '130', cy: '150', r: '5', fill: '#8A2BE2'
 });
 const rightPupil = createSVGElement('circle', {
-    cx: '180', cy: '170', r: '5', fill: '#8A2BE2'
+    cx: '170', cy: '150', r: '5', fill: '#8A2BE2'
 });
 svg.appendChild(leftPupil);
 svg.appendChild(rightPupil);
 
-// Create wavy, long hair
+// Create hair
 const hair = createSVGElement('path', {
-    d: `M90,140 
-       Q60,200 80,260 
-       Q100,320 80,380 
-       Q60,440 100,480
-       L300,480 
-       Q340,440 320,380 
-       Q300,320 320,260 
-       Q340,200 310,140
-       Q280,100 200,120
-       Q120,100 90,140
-       Z`,
+    d: 'M80,120 Q150,40 220,120 Q180,400 120,400 Q60,280 80,120',
     fill: 'none',
     stroke: '#8A2BE2',
     'stroke-width': '2'
@@ -60,7 +50,7 @@ svg.appendChild(hair);
 
 // Create mouth
 const mouth = createSVGElement('path', {
-    d: 'M140,220 Q160,240 180,220',
+    d: 'M130,200 Q150,220 170,200',
     fill: 'none',
     stroke: '#8A2BE2',
     'stroke-width': '2'
@@ -74,8 +64,8 @@ function moveEyes(event) {
     const mouseY = event.clientY - rect.top;
 
     [leftPupil, rightPupil].forEach((pupil, index) => {
-        const eyeCx = index === 0 ? 140 : 180;
-        const eyeCy = 170;
+        const eyeCx = index === 0 ? 130 : 170;
+        const eyeCy = 150;
         const eyeRx = 15;
         const eyeRy = 10;
 
@@ -93,34 +83,31 @@ function moveEyes(event) {
 
 svg.addEventListener('mousemove', moveEyes);
 
-// Function to animate face lines and hair
+// Function to animate face lines
 function animateLines() {
     const t = Date.now() / 1000;
-    const newFaceD = `M${120 + Math.sin(t) * 2},${140 + Math.cos(t) * 2} 
-                      Q${150 + Math.cos(t) * 2},${80 + Math.sin(t) * 2} 
-                      ${200 + Math.sin(t) * 2},${140 + Math.cos(t) * 2} 
-                      Q${240 + Math.cos(t) * 2},${200 + Math.sin(t) * 2} 
-                      ${200 + Math.sin(t) * 2},${260 + Math.cos(t) * 2} 
-                      Q${150 + Math.cos(t) * 2},${300 + Math.sin(t) * 2} 
-                      ${100 + Math.sin(t) * 2},${260 + Math.cos(t) * 2} 
-                      Q${80 + Math.cos(t) * 2},${200 + Math.sin(t) * 2} 
-                      ${120 + Math.sin(t) * 2},${140 + Math.cos(t) * 2}`;
+    const newFaceD = `M${100 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
+                      Q${150 + Math.cos(t) * 2},${60 + Math.sin(t) * 2} 
+                      ${200 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
+                      Q${240 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
+                      ${200 + Math.sin(t) * 2},${240 + Math.cos(t) * 2} 
+                      Q${150 + Math.cos(t) * 2},${280 + Math.sin(t) * 2} 
+                      ${100 + Math.sin(t) * 2},${240 + Math.cos(t) * 2} 
+                      Q${60 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
+                      ${100 + Math.sin(t) * 2},${120 + Math.cos(t) * 2}`;
     face.setAttribute('d', newFaceD);
 
-    const newHairD = `M${90 + Math.sin(t) * 3},${140 + Math.cos(t) * 2}
-                      Q${60 + Math.cos(t) * 4},${200 + Math.sin(t) * 3} ${80 + Math.sin(t) * 3},${260 + Math.cos(t) * 2}
-                      Q${100 + Math.cos(t) * 4},${320 + Math.sin(t) * 3} ${80 + Math.sin(t) * 3},${380 + Math.cos(t) * 2}
-                      Q${60 + Math.cos(t) * 4},${440 + Math.sin(t) * 3} ${100 + Math.sin(t) * 3},${480 + Math.cos(t) * 2}
-                      L${300 + Math.sin(t) * 3},${480 + Math.cos(t) * 2}
-                      Q${340 + Math.cos(t) * 4},${440 + Math.sin(t) * 3} ${320 + Math.sin(t) * 3},${380 + Math.cos(t) * 2}
-                      Q${300 + Math.cos(t) * 4},${320 + Math.sin(t) * 3} ${320 + Math.sin(t) * 3},${260 + Math.cos(t) * 2}
-                      Q${340 + Math.cos(t) * 4},${200 + Math.sin(t) * 3} ${310 + Math.sin(t) * 3},${140 + Math.cos(t) * 2}
-                      Q${280 + Math.cos(t) * 3},${100 + Math.sin(t) * 2} ${200 + Math.sin(t) * 3},${120 + Math.cos(t) * 2}
-                      Q${120 + Math.cos(t) * 3},${100 + Math.sin(t) * 2} ${90 + Math.sin(t) * 3},${140 + Math.cos(t) * 2}
-                      Z`;
+    const newHairD = `M${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
+                      Q${150 + Math.cos(t) * 3},${40 + Math.sin(t) * 3} 
+                      ${220 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
+                      Q${180 + Math.cos(t) * 3},${400 + Math.sin(t) * 4} 
+                      ${120 + Math.sin(t) * 2},${400 + Math.cos(t) * 2} 
+                      Q${60 + Math.cos(t) * 3},${280 + Math.sin(t) * 3} 
+                      ${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2}`;
     hair.setAttribute('d', newHairD);
     
     requestAnimationFrame(animateLines);
 }
 
 animateLines();
+
