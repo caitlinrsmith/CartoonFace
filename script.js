@@ -39,9 +39,9 @@ const rightPupil = createSVGElement('circle', {
 svg.appendChild(leftPupil);
 svg.appendChild(rightPupil);
 
-// Create hair
+// Create hair with symmetric curves
 const hair = createSVGElement('path', {
-    d: 'M80,120 Q150,40 220,120 Q150,400 150,400 Q60,280 80,120',
+    d: 'M80,120 Q150,40 220,120 Q240,280 150,400 Q60,280 80,120',
     fill: 'none',
     stroke: '#8A2BE2',
     'stroke-width': '2'
@@ -100,7 +100,7 @@ function animateLines() {
     const newHairD = `M${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
                       Q${150 + Math.cos(t) * 3},${40 + Math.sin(t) * 3} 
                       ${220 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
-                      Q${150 + Math.cos(t) * 3},${400 + Math.sin(t) * 4} 
+                      Q${240 + Math.cos(t) * 3},${280 + Math.sin(t) * 3} 
                       ${150 + Math.sin(t) * 2},${400 + Math.cos(t) * 2} 
                       Q${60 + Math.cos(t) * 3},${280 + Math.sin(t) * 3} 
                       ${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2}`;
