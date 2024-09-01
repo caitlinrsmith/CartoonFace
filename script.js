@@ -39,6 +39,22 @@ const rightPupil = createSVGElement('circle', {
 svg.appendChild(leftPupil);
 svg.appendChild(rightPupil);
 
+// Create eyebrows (new addition)
+const leftEyebrow = createSVGElement('path', {
+    d: 'M110,120 Q130,110 150,120',
+    fill: 'none',
+    stroke: '#8A2BE2',
+    'stroke-width': '2'
+});
+const rightEyebrow = createSVGElement('path', {
+    d: 'M150,120 Q170,110 190,120',
+    fill: 'none',
+    stroke: '#8A2BE2',
+    'stroke-width': '2'
+});
+svg.appendChild(leftEyebrow);
+svg.appendChild(rightEyebrow);
+
 // Create hair with asymmetric curves
 const hair = createSVGElement('path', {
     d: 'M80,120 Q150,40 220,120 ' +
@@ -132,6 +148,11 @@ function animateLines() {
                       ${60 + Math.cos(t) * 2},${140 + Math.sin(t) * 2} 
                       ${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2}`;
     hair.setAttribute('d', newHairD);
+    
+    // Animate eyebrows (new addition)
+    const eyebrowOffset = Math.sin(t * 2) * 3;
+    leftEyebrow.setAttribute('d', `M110,${120 + eyebrowOffset} Q130,${110 + eyebrowOffset} 150,${120 + eyebrowOffset}`);
+    rightEyebrow.setAttribute('d', `M150,${120 + eyebrowOffset} Q170,${110 + eyebrowOffset} 190,${120 + eyebrowOffset}`);
     
     requestAnimationFrame(animateLines);
 }
