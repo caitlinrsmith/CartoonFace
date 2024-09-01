@@ -39,9 +39,11 @@ const rightPupil = createSVGElement('circle', {
 svg.appendChild(leftPupil);
 svg.appendChild(rightPupil);
 
-// Create hair with symmetric curves
+// Create hair with symmetric curves and two bumps in the lower half
 const hair = createSVGElement('path', {
-    d: 'M80,120 Q150,40 220,120 Q240,280 150,400 Q60,280 80,120',
+    d: 'M80,120 Q150,40 220,120 ' +
+       'C240,180 260,220 240,260 C220,300 200,320 220,360 ' +
+       'Q150,400 80,360 C100,320 80,300 60,260 C40,220 60,180 80,120',
     fill: 'none',
     stroke: '#8A2BE2',
     'stroke-width': '2'
@@ -83,7 +85,7 @@ function moveEyes(event) {
 
 svg.addEventListener('mousemove', moveEyes);
 
-// Function to animate face lines
+// Function to animate face and hair lines
 function animateLines() {
     const t = Date.now() / 1000;
     const newFaceD = `M${100 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
@@ -100,9 +102,19 @@ function animateLines() {
     const newHairD = `M${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
                       Q${150 + Math.cos(t) * 3},${40 + Math.sin(t) * 3} 
                       ${220 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
-                      Q${240 + Math.cos(t) * 3},${280 + Math.sin(t) * 3} 
-                      ${150 + Math.sin(t) * 2},${400 + Math.cos(t) * 2} 
-                      Q${60 + Math.cos(t) * 3},${280 + Math.sin(t) * 3} 
+                      C${240 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
+                      ${260 + Math.sin(t) * 2},${220 + Math.cos(t) * 2} 
+                      ${240 + Math.cos(t) * 2},${260 + Math.sin(t) * 2} 
+                      C${220 + Math.sin(t) * 2},${300 + Math.cos(t) * 2} 
+                      ${200 + Math.cos(t) * 2},${320 + Math.sin(t) * 2} 
+                      ${220 + Math.sin(t) * 2},${360 + Math.cos(t) * 2} 
+                      Q${150 + Math.cos(t) * 3},${400 + Math.sin(t) * 3} 
+                      ${80 + Math.sin(t) * 2},${360 + Math.cos(t) * 2} 
+                      C${100 + Math.cos(t) * 2},${320 + Math.sin(t) * 2} 
+                      ${80 + Math.sin(t) * 2},${300 + Math.cos(t) * 2} 
+                      ${60 + Math.cos(t) * 2},${260 + Math.sin(t) * 2} 
+                      C${40 + Math.sin(t) * 2},${220 + Math.cos(t) * 2} 
+                      ${60 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
                       ${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2}`;
     hair.setAttribute('d', newHairD);
     
