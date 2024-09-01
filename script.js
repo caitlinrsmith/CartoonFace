@@ -39,11 +39,14 @@ const rightPupil = createSVGElement('circle', {
 svg.appendChild(leftPupil);
 svg.appendChild(rightPupil);
 
-// Create hair with symmetric curves and two bumps in the lower half
+// Create hair with asymmetric curves
 const hair = createSVGElement('path', {
     d: 'M80,120 Q150,40 220,120 ' +
-       'C240,180 260,220 240,260 C220,300 200,320 220,360 ' +
-       'Q150,400 80,360 C100,320 80,300 60,260 C40,220 60,180 80,120',
+       'C240,140 260,160 240,180 C220,200 240,220 260,240 ' +
+       'C280,260 260,280 240,300 C220,320 240,340 260,360 ' +
+       'Q150,400 40,360 C60,340 40,320 60,300 ' +
+       'C80,280 60,260 40,240 C20,220 40,200 60,180 ' +
+       'C80,160 60,140 80,120',
     fill: 'none',
     stroke: '#8A2BE2',
     'stroke-width': '2'
@@ -102,19 +105,31 @@ function animateLines() {
     const newHairD = `M${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
                       Q${150 + Math.cos(t) * 3},${40 + Math.sin(t) * 3} 
                       ${220 + Math.sin(t) * 2},${120 + Math.cos(t) * 2} 
-                      C${240 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
-                      ${260 + Math.sin(t) * 2},${220 + Math.cos(t) * 2} 
-                      ${240 + Math.cos(t) * 2},${260 + Math.sin(t) * 2} 
-                      C${220 + Math.sin(t) * 2},${300 + Math.cos(t) * 2} 
-                      ${200 + Math.cos(t) * 2},${320 + Math.sin(t) * 2} 
-                      ${220 + Math.sin(t) * 2},${360 + Math.cos(t) * 2} 
+                      C${240 + Math.cos(t) * 2},${140 + Math.sin(t) * 2} 
+                      ${260 + Math.sin(t) * 2},${160 + Math.cos(t) * 2} 
+                      ${240 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
+                      C${220 + Math.sin(t) * 2},${200 + Math.cos(t) * 2} 
+                      ${240 + Math.cos(t) * 2},${220 + Math.sin(t) * 2} 
+                      ${260 + Math.sin(t) * 2},${240 + Math.cos(t) * 2} 
+                      C${280 + Math.cos(t) * 2},${260 + Math.sin(t) * 2} 
+                      ${260 + Math.sin(t) * 2},${280 + Math.cos(t) * 2} 
+                      ${240 + Math.cos(t) * 2},${300 + Math.sin(t) * 2} 
+                      C${220 + Math.sin(t) * 2},${320 + Math.cos(t) * 2} 
+                      ${240 + Math.cos(t) * 2},${340 + Math.sin(t) * 2} 
+                      ${260 + Math.sin(t) * 2},${360 + Math.cos(t) * 2} 
                       Q${150 + Math.cos(t) * 3},${400 + Math.sin(t) * 3} 
-                      ${80 + Math.sin(t) * 2},${360 + Math.cos(t) * 2} 
-                      C${100 + Math.cos(t) * 2},${320 + Math.sin(t) * 2} 
-                      ${80 + Math.sin(t) * 2},${300 + Math.cos(t) * 2} 
+                      ${40 + Math.sin(t) * 2},${360 + Math.cos(t) * 2} 
+                      C${60 + Math.cos(t) * 2},${340 + Math.sin(t) * 2} 
+                      ${40 + Math.sin(t) * 2},${320 + Math.cos(t) * 2} 
+                      ${60 + Math.cos(t) * 2},${300 + Math.sin(t) * 2} 
+                      C${80 + Math.sin(t) * 2},${280 + Math.cos(t) * 2} 
                       ${60 + Math.cos(t) * 2},${260 + Math.sin(t) * 2} 
-                      C${40 + Math.sin(t) * 2},${220 + Math.cos(t) * 2} 
+                      ${40 + Math.sin(t) * 2},${240 + Math.cos(t) * 2} 
+                      C${20 + Math.cos(t) * 2},${220 + Math.sin(t) * 2} 
+                      ${40 + Math.sin(t) * 2},${200 + Math.cos(t) * 2} 
                       ${60 + Math.cos(t) * 2},${180 + Math.sin(t) * 2} 
+                      C${80 + Math.sin(t) * 2},${160 + Math.cos(t) * 2} 
+                      ${60 + Math.cos(t) * 2},${140 + Math.sin(t) * 2} 
                       ${80 + Math.sin(t) * 2},${120 + Math.cos(t) * 2}`;
     hair.setAttribute('d', newHairD);
     
